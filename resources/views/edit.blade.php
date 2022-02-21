@@ -20,15 +20,16 @@
                 <div class="card" style="background-color: #4527a0">
                     <div class="row text-center">
                         <div class="card-body col-md-6" style="border-right:1px solid #1a202c">
-                            <form action="/" method="POST" id="form">
+                            <form action="{{ url('update/'.$to_edit->id) }}" method="post" id="form">
                                 @csrf
+                                @method('PUT');
                                 <div class="row pt-3 pb-3">
 
                                     <div class="col">
                                         <label for="name">Name:</label>
                                     </div>
                                     <div class="col">
-                                        <input class="input" type="text" name="name" required>
+                                        <input class="input" type="text" name="name" value="{{ $to_edit->name }}" required>
                                     </div>
                                     
                                 </div>
@@ -38,7 +39,7 @@
                                         <label for="name">Age:</label>
                                     </div>
                                     <div class="col">
-                                        <input class="input" type="number" name="age" required>
+                                        <input class="input" type="number" name="age" value="{{ $to_edit->age }}" required>
                                     </div>
                                     
                                 </div>
@@ -48,7 +49,7 @@
                                         <label for="name">Course:</label>
                                     </div>
                                     <div class="col">
-                                        <input class="input" type="text" name="course" required>
+                                        <input class="input" type="text" name="course" value="{{ $to_edit->course }}" required>
                                     </div>
                                     
                                 </div>
@@ -58,14 +59,13 @@
                                         <label for="name">Hobby:</label>
                                     </div>
                                     <div class="col">
-                                        <input class="input" type="text" name="hobby" required>
+                                        <input class="input" type="text" name="hobby" value="{{ $to_edit->hobby }}" required>
                                     </div>
                                     
                                 </div>
                                                                      
                                     <button class="submit btn-primary col-md-3 p-2">Submit</button>
-                                    <input type="button" value="Clear" class="btn-primary col-md-3 p-2"
-                                    onclick="clearInputs()">
+                                    
                                                                
                             </form>
                         </div>  
@@ -83,25 +83,24 @@
                               </tr>
                             </thead>
                             <tbody>
-                                @foreach ($info as $user)
-                                    
+                                                
                                 <tr>
-                                    <th scope="row">{{ $user->id }}</th>
-                                    <td>{{ $user->name }}</td>
-                                    <td>{{ $user->age }}</td>
-                                    <td>{{ $user->course }}</td>
-                                    <td>{{ $user->hobby }}</td>
+                                    <th scope="row">{{ $to_edit->id }}</th>
+                                    <td>{{ $to_edit->name }}</td>
+                                    <td>{{ $to_edit->age }}</td>
+                                    <td>{{ $to_edit->course }}</td>
+                                    <td>{{ $to_edit->hobby }}</td>
                                     <td>
-                                        <a class="edit" href="{{url('/edit/'.$user->id)}}">
+                                        <a class="edit" href="{{url('/edit/'.$to_edit->id)}}">
                                             Edit  
                                         </a>
                                     || 
-                                    <a class="delete" href="{{url('/edit/'.$user->id)}}">
+                                    <a class="delete" href="{{url('/delete/'.$to_edit->id)}}">
                                             Delete  
                                         </a>
                                     </td>
                                 </tr>
-                                @endforeach
+                                
                               
                             </tbody>
                           </table>
@@ -114,12 +113,3 @@
     </body>
 </html>
 
-<script type="text/javascript">
-   // var input_fields = document.getElementByClassName('.input');
-    function clearInputs(){
-   let form = document.getElementById('#form');
-        form.reset();
-   }
-
-
-</script>

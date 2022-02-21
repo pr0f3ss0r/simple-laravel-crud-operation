@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserInfoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,3 +17,13 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::post('/', [UserInfoController::class, 'store']);
+
+Route::get('/', [UserInfoController::class, 'show']);
+
+Route::get('edit/{id}', [UserInfoController::class, 'edit']);
+
+Route::put('update/{id}',[UserInfoController::class, 'update']);
+
+Route::get('delete/{id}',[UserInfoController::class, 'destroy']);
